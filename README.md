@@ -61,7 +61,6 @@ Simple Visualizer from mic input for Android.
 ## Samples
 <a href="https://play.google.com/store/apps/details?id=com.tyorikan.voicerecordingvisualizer.sample"><img src="http://www.android.com/images/brand/get_it_on_play_logo_large.png"/></a>
 
-<!--
 ## Gradle
 ```groovy
 repositories {
@@ -72,7 +71,6 @@ dependencies {
     compile 'com.tyorikan:voice-recording-visualizer:1.0.0@aar'
 }
 ```
--->
 
 ## License
     Copyright 2015 tyorikan
