@@ -1,2 +1,41 @@
-# voice-recording-visualizer
+
+# Voice Recording Visualizer
+
+[![License](https://img.shields.io/badge/license-Apache%202-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0)
+[![Download](https://api.bintray.com/packages/tyorikan/maven/voice-recording-visualizer/images/download.svg)](https://bintray.com/tyorikan/maven/voice-recording-visualizer/_latestVersion)
+
 Simple Visualizer from mic input for Android.
+
+## demo
+[![IMAGE demo](http://img.youtube.com/vi/fJTl1bgQ3j4/0.jpg)](http://www.youtube.com/watch?v=fJTl1bgQ3j4)
+
+## Samples
+<a href="https://play.google.com/store/apps/details?id=com.tyorikan.voicerecordingvisualizer.sample"><img src="http://www.android.com/images/brand/get_it_on_play_logo_large.png"/></a>
+
+<!--
+## Gradle
+```groovy
+repositories {
+    jcenter()
+}
+
+dependencies {
+    compile 'com.tyorikan:voice-recording-visualizer:1.0.0@aar'
+}
+```
+-->
+
+## License
+    Copyright 2015 tyorikan
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
