@@ -6,6 +6,55 @@
 
 Simple Visualizer from mic input for Android.
 
+## Usage
+```
+    @Override 
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        ...
+        VisualizerView visualizerView = (VisualizerView) findViewById(R.id.visualizer);
+
+        RecordingSampler recordingSampler = new RecordingSampler();
+        recordingSampler.setVolumeListener(this);  // for custom implements
+        recordingSampler.setSamplingInterval(100); // voice sampling interval
+        recordingSampler.link(visualizerView);     // link to visualizer
+
+        recordingSampler.startRecording();
+    }
+    
+    @Override
+    protected void onPause() {
+        mRecordingSampler.stopRecording();
+        super.onPause();
+    }
+    
+    @Override 
+    protected void onDestroy() { 
+        mRecordingSampler.release();
+        super.onDestroy(); 
+    } 
+```
+
+## VisualizerView
+```
+<com.tyorikan.voicerecordingvisualizer.VisualizerView
+                android:id="@+id/visualizer"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:background="@android:color/black"
+                app:numColumns="4"
+                app:renderColor="@color/renderColor"
+                app:renderRange="top" />
+```
+
+### VisualizerView attrs
+| Params        | format | value |
+|:--------------|:------------:|:------------:|
+| numColumn     | integer | num of visualizer column (ex. `5`, `20`, `100`) |
+| renderColor   | color |  visualizer color (ex. `#EFEFEF`, `@color/light_blue`) |
+| renderRange   | enum | render direction `top` `bottom` `both` |
+| (renderType)  | flag | render type `bar` |
+
 ## demo
 [![IMAGE demo](http://img.youtube.com/vi/fJTl1bgQ3j4/0.jpg)](http://www.youtube.com/watch?v=fJTl1bgQ3j4)
 
