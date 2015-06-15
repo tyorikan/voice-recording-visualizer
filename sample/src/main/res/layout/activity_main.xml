@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+        <com.tyorikan.voicerecordingvisualizer.VisualizerView
+                android:id="@+id/visualizer"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/spacing_large"
+                android:background="@android:color/black"
+                app:numColumns="4"
+                app:renderColor="@color/renderColor"
+                app:renderRange="top" />
+
+        <com.tyorikan.voicerecordingvisualizer.VisualizerView
+                android:id="@+id/visualizer2"
+                android:layout_width="50dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center_horizontal|top"
+                android:layout_marginTop="@dimen/spacing_large"
+                android:background="@android:color/background_light"
+                app:numColumns="40"
+                app:renderColor="@color/renderColor2"
+                app:renderRange="bottom" />
+
+        <com.tyorikan.voicerecordingvisualizer.VisualizerView
+                android:id="@+id/visualizer3"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_gravity="center_horizontal|bottom"
+                android:layout_marginTop="@dimen/spacing_large"
+                android:background="@android:color/darker_gray"
+                app:numColumns="100"
+                app:renderColor="@color/renderColor3"
+                app:renderRange="both" />
+
+    </LinearLayout>
+
+    <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:layout_margin="@dimen/spacing_large"
+            android:src="@drawable/ic_mic"
+            app:backgroundTint="@android:color/white"
+            app:borderWidth="0dp"
+            app:fabSize="normal" />
+</FrameLayout>
