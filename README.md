@@ -3,6 +3,7 @@
 
 [![License](https://img.shields.io/badge/license-Apache%202-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0)
 [![Download](https://api.bintray.com/packages/tyorikan/maven/voice-recording-visualizer/images/download.svg)](https://bintray.com/tyorikan/maven/voice-recording-visualizer/_latestVersion)
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Voice%20Recording%20Visualizer-brightgreen.svg?style=flat)](http://android-arsenal.com/details/1/1984)
 
 Simple Visualizer from mic input for Android.
 
