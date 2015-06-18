@@ -56,6 +56,9 @@ public class VisualizerView extends FrameLayout {
     private Rect mRect = new Rect();
     private Paint mPaint = new Paint();
 
+    private float mColumnWidth;
+    private float mSpace;
+
     public VisualizerView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(context, attrs);
@@ -95,6 +98,17 @@ public class VisualizerView extends FrameLayout {
             mCanvas = new Canvas(mCanvasBitmap);
         }
 
+        if (mNumColumns > getWidth()) {
+            mNumColumns = DEFAULT_NUM_COLUMNS;
+        }
+
+        mColumnWidth = (float) getWidth() / (float) mNumColumns;
+        mSpace = mColumnWidth / 8f;
+
+        if (mBaseY == 0) {
+            mBaseY = getHeight() / 2;
+        }
+
         canvas.drawBitmap(mCanvasBitmap, new Matrix(), null);
     }
 
@@ -104,7 +118,6 @@ public class VisualizerView extends FrameLayout {
      * @param volume volume from mic input
      */
     protected void receive(final int volume) {
-
         new Handler(Looper.getMainLooper()).post(new Runnable() {
             @Override
             public void run() {
@@ -118,27 +131,18 @@ public class VisualizerView extends FrameLayout {
     }
 
     private void drawBar(int volume) {
-        if (mNumColumns > getWidth()) {
-            mNumColumns = DEFAULT_NUM_COLUMNS;
-        }
-
-        float columnWidth = (float) getWidth() / (float) mNumColumns;
-        float space = columnWidth / 8f;
-
         for (int i = 0; i < mNumColumns; i++) {
             double randomVolume = Math.random() * volume + 1;
             float height = ((float) getHeight() / 60f) * (float) randomVolume;
+            float left = i * mColumnWidth + mSpace;
+            float right = (i + 1) * mColumnWidth - mSpace;
 
-            RectF rect =
-                    createRectF(i * columnWidth + space, (i + 1) * columnWidth - space, height);
+            RectF rect = createRectF(left, right, height);
             mCanvas.drawRect(rect, mPaint);
         }
     }
 
     private RectF createRectF(float left, float right, float height) {
-        if (mBaseY == 0) {
-            mBaseY = getHeight() / 2;
-        }
         switch (mRenderRange) {
             case RENDAR_RANGE_TOP:
                 return new RectF(left, mBaseY - (height / 2), right, mBaseY);
