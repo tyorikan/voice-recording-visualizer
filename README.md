@@ -69,7 +69,7 @@ repositories {
 }
 
 dependencies {
-    compile 'com.tyorikan:voice-recording-visualizer:1.0.0@aar'
+    compile 'com.tyorikan:voice-recording-visualizer:1.0.1@aar'
 }
 ```
 
