@@ -122,6 +122,12 @@ public class RecordingSampler {
     public void stopRecording() {
         mIsRecording = false;
         mTimer.cancel();
+
+        if (mVisualizerViews != null && !mVisualizerViews.isEmpty()) {
+            for (int i = 0; i < mVisualizerViews.size(); i++) {
+                mVisualizerViews.get(i).receive(0);
+            }
+        }
     }
 
     private void runRecording() {
