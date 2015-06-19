@@ -27,9 +27,10 @@
                 android:layout_gravity="center_horizontal|top"
                 android:layout_marginTop="@dimen/spacing_large"
                 android:background="@android:color/background_light"
-                app:numColumns="40"
+                app:numColumns="10"
                 app:renderColor="@color/renderColor2"
-                app:renderRange="bottom" />
+                app:renderRange="bottom"
+                app:renderType="pixel" />
 
         <com.tyorikan.voicerecordingvisualizer.VisualizerView
                 android:id="@+id/visualizer3"
@@ -40,7 +41,8 @@
                 android:background="@android:color/darker_gray"
                 app:numColumns="100"
                 app:renderColor="@color/renderColor3"
-                app:renderRange="both" />
+                app:renderRange="both"
+                app:renderType="pixel" />
 
     </LinearLayout>
 

@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements
             observer.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
                 @Override
                 public void onGlobalLayout() {
-                    mVisualizerView.setBaseY(mVisualizerView.getHeight() * 4 / 5);
+                    mVisualizerView.setBaseY(mVisualizerView.getHeight());
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
                         mVisualizerView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
                     } else {

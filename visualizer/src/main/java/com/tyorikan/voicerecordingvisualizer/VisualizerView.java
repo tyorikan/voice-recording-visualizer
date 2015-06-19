@@ -125,6 +125,9 @@ public class VisualizerView extends FrameLayout {
                 if ((mType & Type.BAR.getFlag()) != 0) {
                     drawBar(volume);
                 }
+                if ((mType & Type.PIXEL.getFlag()) != 0) {
+                    drawPixel(volume);
+                }
                 invalidate();
             }
         });
@@ -132,8 +135,7 @@ public class VisualizerView extends FrameLayout {
 
     private void drawBar(int volume) {
         for (int i = 0; i < mNumColumns; i++) {
-            double randomVolume = Math.random() * volume + 1;
-            float height = ((float) getHeight() / 60f) * (float) randomVolume;
+            float height = getRandomHeight(volume);
             float left = i * mColumnWidth + mSpace;
             float right = (i + 1) * mColumnWidth - mSpace;
 
@@ -142,16 +144,78 @@ public class VisualizerView extends FrameLayout {
         }
     }
 
+    private void drawPixel(int volume) {
+        for (int i = 0; i < mNumColumns; i++) {
+            float height = getRandomHeight(volume);
+            float left = i * mColumnWidth + mSpace;
+            float right = (i + 1) * mColumnWidth - mSpace;
+
+            int drawCount = (int) (height / (right - left));
+            if (drawCount == 0) {
+                drawCount = 1;
+            }
+            float drawHeight = height / drawCount;
+
+            // draw each pixel
+            for (int j = 0; j < drawCount; j++) {
+
+                float top, bottom;
+                RectF rect;
+
+                switch (mRenderRange) {
+                    case RENDAR_RANGE_TOP:
+                        bottom = mBaseY - (drawHeight * j);
+                        top = bottom - drawHeight + mSpace;
+                        rect = new RectF(left, top, right, bottom);
+                        break;
+
+                    case RENDAR_RANGE_BOTTOM:
+                        top = mBaseY + (drawHeight * j);
+                        bottom = top + drawHeight - mSpace;
+                        rect = new RectF(left, top, right, bottom);
+                        break;
+
+                    case RENDAR_RANGE_TOP_BOTTOM:
+                        bottom = mBaseY - (height / 2) + (drawHeight * j);
+                        top = bottom - drawHeight + mSpace;
+                        rect = new RectF(left, top, right, bottom);
+                        break;
+
+                    default:
+                        return;
+                }
+                mCanvas.drawRect(rect, mPaint);
+            }
+        }
+    }
+
+    private float getRandomHeight(int volume) {
+        double randomVolume = Math.random() * volume + 1;
+        float height = getHeight();
+        switch (mRenderRange) {
+            case RENDAR_RANGE_TOP:
+                height = mBaseY;
+                break;
+            case RENDAR_RANGE_BOTTOM:
+                height = (getHeight() - mBaseY);
+                break;
+            case RENDAR_RANGE_TOP_BOTTOM:
+                height = getHeight();
+                break;
+        }
+        return (height / 60f) * (float) randomVolume;
+    }
+
     private RectF createRectF(float left, float right, float height) {
         switch (mRenderRange) {
             case RENDAR_RANGE_TOP:
-                return new RectF(left, mBaseY - (height / 2), right, mBaseY);
+                return new RectF(left, mBaseY - (height), right, mBaseY);
             case RENDAR_RANGE_BOTTOM:
                 return new RectF(left, mBaseY, right, mBaseY + (height / 2));
             case RENDAR_RANGE_TOP_BOTTOM:
-                return new RectF(left, mBaseY - (height / 2), right, mBaseY + (height / 2));
+                return new RectF(left, mBaseY - (height), right, mBaseY + (height / 2));
             default:
-                return new RectF(left, mBaseY - (height / 2), right, mBaseY);
+                return new RectF(left, mBaseY - (height), right, mBaseY);
         }
     }
 
@@ -159,7 +223,7 @@ public class VisualizerView extends FrameLayout {
      * visualizer type
      */
     public enum Type {
-        BAR(0x1);
+        BAR(0x1), PIXEL(0x2);
 
         private int mFlag;
 

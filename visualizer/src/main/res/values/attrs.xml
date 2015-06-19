@@ -10,6 +10,7 @@
         </attr>
         <attr name="renderType">
             <flag name="bar" value="0x1" />
+            <flag name="pixel" value="0x2" />
         </attr>
     </declare-styleable>
 </resources>
