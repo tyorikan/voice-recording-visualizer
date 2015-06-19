@@ -51,7 +51,7 @@ Simple Visualizer from mic input for Android.
 ### VisualizerView attrs
 | Params        | format | value |
 |:--------------|:------------:|:------------:|
-| numColumn     | integer | num of visualizer column (ex. `5`, `20`, `100`) |
+| numColumns    | integer | num of visualizer column (ex. `5`, `20`, `100`) |
 | renderColor   | color |  visualizer color (ex. `#EFEFEF`, `@color/light_blue`) |
 | renderRange   | enum | render direction `top (default)`, `bottom`, `both` |
 | (renderType)  | flag | render type `bar (default)`, `pixel` |
