@@ -25,6 +25,7 @@ import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.os.Handler;
@@ -55,6 +56,7 @@ public class VisualizerView extends FrameLayout {
     private Bitmap mCanvasBitmap;
     private Rect mRect = new Rect();
     private Paint mPaint = new Paint();
+    private Paint mFadePaint = new Paint();
 
     private float mColumnWidth;
     private float mSpace;
@@ -63,6 +65,7 @@ public class VisualizerView extends FrameLayout {
         super(context, attrs);
         init(context, attrs);
         mPaint.setColor(mRenderColor);
+        mFadePaint.setColor(Color.argb(138, 255, 255, 255));
     }
 
     private void init(Context context, AttributeSet attrs) {
@@ -121,7 +124,20 @@ public class VisualizerView extends FrameLayout {
         new Handler(Looper.getMainLooper()).post(new Runnable() {
             @Override
             public void run() {
-                mCanvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
+                if (mCanvas == null) {
+                    return;
+                }
+
+                if (volume == 0) {
+                    mCanvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
+                } else if ((mType & Type.FADE.getFlag()) != 0) {
+                    // Fade out old contents
+                    mFadePaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.MULTIPLY));
+                    mCanvas.drawPaint(mFadePaint);
+                } else {
+                    mCanvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
+                }
+
                 if ((mType & Type.BAR.getFlag()) != 0) {
                     drawBar(volume);
                 }
@@ -209,13 +225,13 @@ public class VisualizerView extends FrameLayout {
     private RectF createRectF(float left, float right, float height) {
         switch (mRenderRange) {
             case RENDAR_RANGE_TOP:
-                return new RectF(left, mBaseY - (height), right, mBaseY);
+                return new RectF(left, mBaseY - height, right, mBaseY);
             case RENDAR_RANGE_BOTTOM:
-                return new RectF(left, mBaseY, right, mBaseY + (height / 2));
+                return new RectF(left, mBaseY, right, mBaseY + height);
             case RENDAR_RANGE_TOP_BOTTOM:
-                return new RectF(left, mBaseY - (height), right, mBaseY + (height / 2));
+                return new RectF(left, mBaseY - height, right, mBaseY + height);
             default:
-                return new RectF(left, mBaseY - (height), right, mBaseY);
+                return new RectF(left, mBaseY - height, right, mBaseY);
         }
     }
 
@@ -223,7 +239,7 @@ public class VisualizerView extends FrameLayout {
      * visualizer type
      */
     public enum Type {
-        BAR(0x1), PIXEL(0x2);
+        BAR(0x1), PIXEL(0x2), FADE(0x4);
 
         private int mFlag;
 

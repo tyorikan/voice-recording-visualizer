@@ -54,7 +54,7 @@ Simple Visualizer from mic input for Android.
 | numColumns    | integer | num of visualizer column (ex. `5`, `20`, `100`) |
 | renderColor   | color |  visualizer color (ex. `#EFEFEF`, `@color/light_blue`) |
 | renderRange   | enum | render direction `top (default)`, `bottom`, `both` |
-| (renderType)  | flag | render type `bar (default)`, `pixel` |
+| (renderType)  | flag | render type `bar (default)`, `pixel`, `fade` |
 
 ## demo
 [![IMAGE demo](http://img.youtube.com/vi/fJTl1bgQ3j4/0.jpg)](http://www.youtube.com/watch?v=fJTl1bgQ3j4)
@@ -69,7 +69,7 @@ repositories {
 }
 
 dependencies {
-    compile 'com.tyorikan:voice-recording-visualizer:1.0.2@aar'
+    compile 'com.tyorikan:voice-recording-visualizer:1.0.3@aar'
 }
 ```
 

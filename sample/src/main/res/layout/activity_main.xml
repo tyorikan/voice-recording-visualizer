@@ -18,7 +18,8 @@
                 android:background="@android:color/black"
                 app:numColumns="4"
                 app:renderColor="@color/renderColor"
-                app:renderRange="top" />
+                app:renderRange="top"
+                app:renderType="bar|fade" />
 
         <com.tyorikan.voicerecordingvisualizer.VisualizerView
                 android:id="@+id/visualizer2"
@@ -30,7 +31,7 @@
                 app:numColumns="10"
                 app:renderColor="@color/renderColor2"
                 app:renderRange="bottom"
-                app:renderType="pixel" />
+                app:renderType="pixel|fade" />
 
         <com.tyorikan.voicerecordingvisualizer.VisualizerView
                 android:id="@+id/visualizer3"
